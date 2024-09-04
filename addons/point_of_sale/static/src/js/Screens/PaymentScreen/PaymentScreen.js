@@ -224,7 +224,15 @@ odoo.define('point_of_sale.PaymentScreen', function (require) {
         }
         async _finalizeValidation() {
             if ((this.currentOrder.is_paid_with_cash() || this.currentOrder.get_change()) && this.env.pos.config.iface_cashdrawer && this.env.proxy && this.env.proxy.printer) {
-                this.env.proxy.printer.open_cashbox();
+                // <GRAP Custom>
+                // Do not automatically open the cashbox, when the order
+                // is validated because :
+                // - It's too late
+                // - is_paid_with_cash() is not a good test, because
+                // cashier can receive meal voucher, or other payment
+                // that requires to open the cashbox.
+                // this.env.proxy.printer.open_cashbox();
+                // </GRAP Custom>
             }
 
             this.currentOrder.initialize_validation_date();
