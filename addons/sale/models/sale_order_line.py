@@ -392,7 +392,10 @@ class SaleOrderLine(models.Model):
         lines_by_company = defaultdict(lambda: self.env['sale.order.line'])
         cached_taxes = {}
         for line in self:
-            lines_by_company[line.company_id] += line
+            if hasattr(line.company_id, "fiscal_company_id"):
+                lines_by_company[line.company_id.fiscal_company_id] += line
+            else:
+                lines_by_company[line.company_id] += line
         for product in self.product_id:
             for tax in product.taxes_id:
                 taxes_by_product_company[(product, tax.company_id)] += tax
