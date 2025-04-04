@@ -347,7 +347,13 @@ export const hotkeyService = {
                 overlay.style.zIndex = 1;
                 const overlayKbd = document.createElement("kbd");
                 overlayKbd.className = "small";
-                overlayKbd.appendChild(document.createTextNode(hotkey.toUpperCase()));
+                // <GRAP: CUSTOM>
+                var text_node = hotkey.toUpperCase();
+                text_node = (text_node === "PAGEDOWN") ? "⇟": text_node;
+                text_node = (text_node === "PAGEUP") ? "⇞": text_node;
+                text_node = (text_node === "ENTER") ? "↵": text_node;
+                // </GRAP>
+                overlayKbd.appendChild(document.createTextNode(text_node));
                 overlay.appendChild(overlayKbd);
 
                 let overlayParent;
