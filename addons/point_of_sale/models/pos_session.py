@@ -923,7 +923,11 @@ class PosSession(models.Model):
             'journal_id': payment_method.journal_id.id,
             'force_outstanding_account_id': outstanding_account.id,
             'destination_account_id':  destination_account.id,
-            'ref': _('Combine %s POS payments from %s') % (payment_method.name, self.name),
+            # <GRAP>
+            # Simplify reference
+            # 'ref': _('Combine %s POS payments from %s') % (payment_method.name, self.name),
+            'ref': f"{self.name} - {payment_method.name}",
+            # </GRAP>
             'pos_payment_method_id': payment_method.id,
             'pos_session_id': self.id,
         })
