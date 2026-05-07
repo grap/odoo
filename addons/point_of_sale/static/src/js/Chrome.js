@@ -496,10 +496,16 @@ odoo.define('point_of_sale.Chrome', function(require) {
                 // Please, throw an Error object in order to get stack trace of the error.
                 // At least we can find the file that throws the error when you look
                 // at the console.
+                /*
+                // <GRAP>
+                // disable this error that will be raised each second, if iot box is up
+                // at the beginning of the session, and then is down, for any reason.
                 this.showPopup('ErrorPopup', {
                     title: this.env._t('Unknown Error'),
                     body: this.env._t('Unable to show information about this error.'),
                 });
+                // </GRAP>
+                */
                 console.error('Unknown error. Unable to show information about this error.', errorToHandle);
             }
         }
