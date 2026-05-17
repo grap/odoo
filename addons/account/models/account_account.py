@@ -551,9 +551,12 @@ class AccountAccount(models.Model):
 
     @api.model
     def _name_search(self, name, args=None, operator='ilike', limit=100, name_get_uid=None):
-        if not name and self._context.get('partner_id') and self._context.get('move_type'):
-            return self._order_accounts_by_frequency_for_partner(
-                            self.env.company.id, self._context.get('partner_id'), self._context.get('move_type'))
+        # <GRAP>
+        # Disable weird feature that hide all possibilities if name is False
+        # if not name and self._context.get('partner_id') and self._context.get('move_type'):
+        #     return self._order_accounts_by_frequency_for_partner(
+        #                     self.env.company.id, self._context.get('partner_id'), self._context.get('move_type'))
+        # </GRAP>
         args = args or []
         domain = []
         if name:
